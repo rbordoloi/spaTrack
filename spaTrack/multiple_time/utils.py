@@ -170,7 +170,7 @@ def pre_check_adata(
 ##      + rho*KL(gamma|mu) + rho*KL(gamma^T|nu)
 ## s.t. gamma >= 0
 def uot(mu, nu, c, epsilon,
-         niter=50, tau=-0.5, verb = 1, rho = np.Inf, stopThr= 1E-7):
+         niter=50, tau=-0.5, verb = 1, rho = np.inf, stopThr= 1E-7):
 
     lmbda = rho / ( rho + epsilon )
     if np.isinf(rho): lmbda = 1
@@ -223,7 +223,7 @@ def uot(mu, nu, c, epsilon,
 #      + rho*KL(pi|mu) + rho*KL(pi^T|nu)
 # s.t. pi >= 0
 def usot(mu, nu, c, c1, c2, alpha, epsilon = 0.1,
-         niter = 10, gw_loss = 'square', rho = np.Inf):
+         niter = 10, gw_loss = 'square', rho = np.inf):
     ## format mu(m,1) nu(n,1)
     mu = np.asarray(mu, float).reshape(-1,1)
     nu = np.asarray(nu, float).reshape(-1,1)
