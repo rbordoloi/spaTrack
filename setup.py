@@ -29,7 +29,7 @@ setuptools.setup(
         'torch>=2.0.1',
         'pandas>=1.4.3',
         'nbformat>=4.2.0',
-        'pysal>=2.6.0',
+        'pysal==2.6.0',
     ],
     python_requires='>=3.7',
 )
