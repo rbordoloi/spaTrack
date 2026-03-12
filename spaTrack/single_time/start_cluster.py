@@ -2,6 +2,7 @@ import os
 import scanpy as sc
 import pandas as pd
 import numpy as np
+import scipy as sp
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import entropy
@@ -10,7 +11,11 @@ import seaborn as sns
 import warnings
 from IPython.display import display
 
+def ensureDense(X) -> np.ndarray:
 
+    if sp.sparse.issparse(X):
+        return X.toarray()
+    return np.array(X)
 
 def assess_start_cluster(adata):
     """Assess the entropy value to identify the starting cluster
@@ -34,7 +39,7 @@ def assess_start_cluster(adata):
         cell_id=adata.obs.index[i]
         cluster_name=adata.obs['cluster'][i]
         adata_cluster=adata[adata.obs.index.isin([cell_id])]
-        matrix = np.array(adata_cluster.X)
+        matrix = ensureDense(adata_cluster.X)
         entropy_name=entropy(matrix[0])
         cluster_name_list.append(cluster_name)
         cell_name_list.append(cell_id)
